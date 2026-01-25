@@ -10,21 +10,29 @@
 
 #define MAX_RETRIES 10
 
-const std::string URL_PART_1 = "https://danbooru.donmai.us/tags.json?limit=";
-const std::string URL_PART_2 = "&page=";
-const std::string URL_PART_3 = "&search[hide_empty]=yes";
+const std::string URL= "https://danbooru.donmai.us/tags.json";
+const std::string PARAM_LIMIT = "limit";
+const std::string PARAM_PAGE = "page";
+const std::string PARAM_HIDE_EMPTY = "search[hide_empty]";
+const std::string PARAM_MIN_POSTS = "search[post_count]";
 const std::string LIMIT = "1000";
+const std::string HIDE_EMPTY = "yes";
 
 std::mutex names_mutex;
 std::vector<std::string> all_names;
 std::atomic<int> current_page{1};
 std::atomic<bool> done{false};
 
-int min_posts = -1;
+int min_posts = 0;
 std::string filename = "danbooru_tags.txt";
 
 cpr::Response getResponse(int page) {
-    return cpr::Get(cpr::Url{URL_PART_1 + LIMIT + URL_PART_2 + std::to_string(page) + URL_PART_3});
+    return cpr::Get(cpr::Url{URL}, cpr::Parameters{
+        {PARAM_LIMIT, LIMIT},
+        {PARAM_PAGE, std::to_string(page)},
+        {PARAM_MIN_POSTS, ">=" + std::to_string(min_posts)},
+        {PARAM_HIDE_EMPTY, HIDE_EMPTY}
+    });
 }
 
 std::string join(const std::vector<std::string> &strings, const char *const delimiter) {
@@ -36,7 +44,6 @@ std::string join(const std::vector<std::string> &strings, const char *const deli
 
 void worker() {
     int retries = 0;
-    int count = 0;
 
     while (!done) {
         int page = current_page.fetch_add(1, std::memory_order_relaxed);
@@ -73,10 +80,7 @@ void worker() {
         local_names.reserve(json.size());
 
         for (const nlohmann::json &item : json) {
-            if (item["post_count"].get<int>() >= min_posts) {
-                local_names.push_back(item["name"].get<std::string>() + "," + std::to_string(item["post_count"].get<int>()));
-                ++count;
-            }
+            local_names.push_back(item["name"].get<std::string>() + "," + std::to_string(item["post_count"].get<int>()));
         }
 
         {
@@ -84,9 +88,8 @@ void worker() {
             all_names.insert(all_names.end(), std::make_move_iterator(local_names.begin()), std::make_move_iterator(local_names.end()));
         }
 
-        std::cout << "got " << count << " tags, meeting the requirements, from page: " << page << std::endl;
+        std::cout << "got " << json.size() << " tags, meeting the requirements, from page: " << page << std::endl;
         retries = 0;
-        count = 0;
         std::this_thread::sleep_for(std::chrono::milliseconds(150));
     }
 }
