@@ -32,12 +32,6 @@ git clone https://github.com/spectre-bit/FetchDanbooruTags.git
 cd FetchDanbooruTags
 ```
 
-## Install dependencies
-run the following command
-```
-vcpkg install
-```
-
 ## build
 for the cmake command you need to copy the path to your vcpkg folder and paste it in the marked place in the -DCMAKE_TOOLCHAIN_FILE argument
 ```
