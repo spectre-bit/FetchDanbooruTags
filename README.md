@@ -1,3 +1,10 @@
+it fetches the danbooru tags and the count of posts tagged with this tag in the following format
+```
+tag,count
+```
+One tag-count pair per line.
+You can specify a minimum amount of posts in dabooru that have to be tagged with a tag to be added to the output file.
+
 # Usage
 Arguments written in <> are optional
 ```
