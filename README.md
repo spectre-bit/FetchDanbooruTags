@@ -7,10 +7,13 @@ fetchDanbooruTags.exe <minimum post count>
 # Build (on Windows using clang++ and ninja)
 ## Requirements
 to be able to build this repository following this tutorial you have to have the following programs installed:
-- clang++
+- llvm (or at least clang++ and lld)
 - cmake
 - vcpkg
 - ninja
+- msvc
+
+Also llvm needs to use the msvc toolchain, llvm with mingw does not work.
 
 ## Clone the repository
 clone the repository into a directory of your choice and change your current directory to the repository
