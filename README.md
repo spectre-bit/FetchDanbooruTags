@@ -14,7 +14,7 @@ fetchDanbooruTags.exe <minimum post count>
 ## Clone the repository
 clone the repository into a directory of your choice and change your current directory to the repository
 ```
-git clone https://github.com/spectre-bit/FetchAllDanbooruTags.git
+git clone https://github.com/spectre-bit/FetchDanbooruTags.git
 cd FetchDanbooruTags
 ```
 
