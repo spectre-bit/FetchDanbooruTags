@@ -5,6 +5,8 @@ tag,count
 One tag-count pair per line.
 You can specify a minimum amount of posts in dabooru that have to be tagged with a tag to be added to the output file.
 
+You can download a prebuild exe at the releases tab.
+
 # Usage
 Arguments written in <> are optional
 ```
