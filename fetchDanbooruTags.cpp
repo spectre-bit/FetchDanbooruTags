@@ -60,7 +60,7 @@ void worker() {
         try {
             json = nlohmann::json::parse(response.text);
         } catch (...) {
-            std::cerr << "JSON parse error on page " << page << "\n";
+            std::cerr << "JSON parse error on page " << page << std::endl;
             continue;
         }
 
