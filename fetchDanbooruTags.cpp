@@ -27,8 +27,7 @@ cpr::Response getResponse(int page) {
     return cpr::Get(cpr::Url{URL_PART_1 + LIMIT + URL_PART_2 + std::to_string(page) + URL_PART_3});
 }
 
-std::string join(const std::vector<std::string> &strings,
-                 const char *const delimiter) {
+std::string join(const std::vector<std::string> &strings, const char *const delimiter) {
     std::ostringstream ss{};
     std::copy(strings.begin(), strings.end() - 1, std::ostream_iterator<std::string>(ss, delimiter));
     ss << strings.back();

@@ -1,11 +1,14 @@
 BasedOnStyle: LLVM
 IndentWidth: 4
 UseTab: Never
-
 ColumnLimit: 0
 
-BreakBeforeBraces: Attach
+AllowAllParametersOfDeclarationOnNextLine: false
+BinPackParameters: true
+BinPackArguments: true
+AlwaysBreakAfterReturnType: None
 
+BreakBeforeBraces: Attach
 BraceWrapping:
   BeforeElse: true
   BeforeCatch: true
