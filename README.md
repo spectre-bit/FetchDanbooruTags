@@ -11,7 +11,7 @@ to be able to build this repository following this tutorial you have to have the
 - cmake
 - vcpkg
 - ninja
-- msvc
+- msvc toolchain
 
 Also llvm needs to use the msvc toolchain, llvm with mingw does not work.
 
