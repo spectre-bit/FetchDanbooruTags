@@ -6,6 +6,7 @@ fetchDanbooruTags.exe <minimum post count>
 
 # Build (on Windows using clang++ and ninja)
 ## Requirements
+to be able to build this repository following this tutorial you have to have the following programs installed:
 - clang++
 - cmake
 - vcpkg
