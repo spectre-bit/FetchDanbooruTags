@@ -35,9 +35,6 @@ cd FetchDanbooruTags
 ## build
 for the cmake command you need to copy the path to your vcpkg folder and paste it in the marked place in the -DCMAKE_TOOLCHAIN_FILE argument
 ```
-mkdir build
-```
-```
 cmake -G Ninja -B build -DCMAKE_BUILD_TYPE=Release -DCMAKE_CXX_COMPILER=clang++ -DCMAKE_TOOLCHAIN_FILE="C:/<path to vcpkg>/scripts/buildsystems/vcpkg.cmake" -DCMAKE_CXX_FLAGS="-O3 -march=native -flto -DNDEBUG" -DCMAKE_EXE_LINKER_FLAGS="-fuse-ld=lld -Wl,/OPT:REF -Wl,/OPT:ICF" -B build
 ```
 ```
